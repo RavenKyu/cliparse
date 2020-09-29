@@ -1,0 +1,16 @@
+version: '3.5'
+volumes:
+  cliparse_package: {}
+
+services:
+  cliparse:
+    image: cliparse-dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    container_name: cliparse-dev
+    volumes:
+      - .:/src
+      - cliparse_package:/usr/local/lib/python3.7/site-packages/
+    command: |
+      /bin/sh start-dev.sh

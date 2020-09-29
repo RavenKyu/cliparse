@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  cliparse:
+    image: cliparse:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: cliparse
+

@@ -1,0 +1,23 @@
+FROM python:3.7.7-alpine3.11
+MAINTAINER Duk Kyu Lim
+
+# ==============================================================================
+# 타임존 설정
+RUN apk add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
+    echo "Asia/Seoul" > /etc/timezone
+
+ENV PYTHONUNBUFFERED=0
+ENV TABULATE_INSTALL=lib-only pip install tabulate
+
+RUN python -m pip install pip --upgrade && \
+    python -m pip install wheel
+
+RUN mkdir -p /src
+WORKDIR /src
+
+ENV PYTHONUSERBASE=/usr/local/
+ENV PATH=${PYTHONUSERBASE}/bin:${PATH}
+
+
+
