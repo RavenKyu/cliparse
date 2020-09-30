@@ -63,8 +63,38 @@ or
 ```bash
 $ python setup.py install
 ```
----
 
+### Running 
+```bash
+$ python -m cliparse ./sample_cli/cli.py 
+```
+
+### Running with docker
+If you use docker, you can try it like below. 
+#### Build
+```bash
+$ docker build -t cliparse:latest .
+``` 
+or
+```bash
+$ docker-compose build
+```
+#### Running
+**the volume option for mounting host directory where the sample cli is.** 
+```bash
+$ docker run -it -v $(pwd):/root --rm cliparse sample_cli/cli.py 
+```
+or
+```bash
+$ docker-compose run -v $(pwd):/root --rm cliparse sample_cli/cli.py
+```
+
+### sample_cli/cli.py
+This sample cli file is also able to run without __Cliparse__. 
+```bash
+python sample_cli/cli.py -h
+```
+---
 ## Sample
 There is a simple sample cli which is able to try basic CRUD. It is in the directory named `sample_cli/cli.py`. Please run command below and try to edit as you want.
 ### Things you can do
@@ -129,37 +159,6 @@ Please, try to tap tab key for completing command line input automatically. Also
 |  0 | John Doe      | How to learn speaking English | Magic House |
 |  1 | George Orwell | 1984                          | Motihari    |
 ````
-### Running 
-```bash
-$ python -m cliparse ./sample_cli/cli.py 
-```
-
-### Running with docker
-If you use docker, you can try it like below. 
-#### Build
-```bash
-$ docker build -t cliparse:latest .
-``` 
-or
-```bash
-$ docker-compose build
-```
-#### Running
-**the volume option for mounting host directory where the sample cli is.** 
-```bash
-$ docker run -it -v $(pwd):/root --rm cliparse sample_cli/cli.py 
-```
-or
-```bash
-$ docker-compose run -v $(pwd):/root --rm cliparse sample_cli/cli.py
-```
-
-### sample_cli/cli.py
-This sample cli file is also able to run without __Cliparse__. 
-```bash
-python sample_cli/cli.py -h
-```
-
 
 ## Contributes
 ### Running as develop mode
