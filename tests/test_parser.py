@@ -1,8 +1,6 @@
 import unittest
 from sample_cli.cli import argument_parser
-from cliparse import CommandArgumentParser, ArgumentCmd
-from cliparse import _SubParsersAction, _HelpAction
-import pprint
+from cliparse import ArgumentCmd
 
 
 class MyTestCase(unittest.TestCase):
