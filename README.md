@@ -1,4 +1,7 @@
 # Cliparse (CLI with ArgumentParser)
+
+![Python package](https://github.com/RavenKyu/cliparse/workflows/Python%20package/badge.svg?branch=master) [![PyPI version](https://badge.fury.io/py/cliparse.svg)](https://badge.fury.io/py/cliparse)
+
 __Cliparse__ is a framework to make CLI with ['Argparse'](https://docs.python.org/3/howto/argparse.html) and ['Cmd'](https://docs.python.org/3/library/cmd.html)  
 
 [![asciicast](https://asciinema.org/a/J83RPQHIb1mAUG3TGSaplqhy4.svg)](https://asciinema.org/a/J83RPQHIb1mAUG3TGSaplqhy4)
