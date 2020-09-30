@@ -1,7 +1,6 @@
 from setuptools import setup, find_packages
 from cliparse import __version__
 
-
 LONG_DESCRIPTION = open("README.md", "r", encoding="utf-8").read()
 
 setup(
@@ -18,7 +17,8 @@ setup(
     install_requires=[
         'tabulate',
     ],
-    packages=find_packages(),
+    packages=find_packages(
+        exclude=['sample_cli', 'sample_cli.*', 'tests', 'tests.*']),
     package_data={},
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -26,7 +26,6 @@ setup(
         "Operating System :: MacOS",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX :: Linux",
-        "Programming Language :: Cython",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Topic :: Utilities",

@@ -1,6 +1,8 @@
 # Cliparse (CLI with ArgumentParser)
 __Cliparse__ is a framework to make CLI with ['Argparse'](https://docs.python.org/3/howto/argparse.html) and ['Cmd'](https://docs.python.org/3/library/cmd.html)  
 
+[![asciicast](https://asciinema.org/a/J83RPQHIb1mAUG3TGSaplqhy4.svg)](https://asciinema.org/a/J83RPQHIb1mAUG3TGSaplqhy4)
+
 ## Concept
 There are times when it is necessary that to provide a command line client like _MySQL Command line client_.
 ```bash

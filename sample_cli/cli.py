@@ -52,7 +52,7 @@ def book_update(argspec):
 
 def book_delete(argspec):
     index = argspec.index
-    index = index.sort()
+    index.sort()
     index.reverse()
     try:
         for i in index:
@@ -68,6 +68,9 @@ def argument_parser():
         description='description',
         epilog='end of description', )
     sub_parser = parser.add_subparsers(dest='sub_parser')
+
+    exit_parser = sub_parser.add_parser('exit', help='Setting Command')
+    exit_parser.set_defaults(func=lambda x: exit(0))
 
     # Setting
     # ==========================================================================
