@@ -4,24 +4,11 @@ import cmd
 import sys
 import readline
 import shlex
-from argparse import ArgumentParser
-from argparse import _SubParsersAction
-from argparse import _HelpAction
-
-import io
-from contextlib import redirect_stdout
 import traceback
 
 
-################################################################################
-class CommandArgumentParser(ArgumentParser):
-    # Preventing to execute exit command after help or error
-    def error(self, message):
-        self.print_help(sys.stderr)
-
-    def exit(self, status=0, message=None):
-        if message:
-            self._print_message(message, sys.stderr)
+# Prevent to execute exit() when help and error method in argparse.Argparser
+sys.exit = lambda: None
 
 
 ################################################################################

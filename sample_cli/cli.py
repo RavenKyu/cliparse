@@ -1,5 +1,5 @@
+import argparse
 import json
-from cliparse import CommandArgumentParser
 from cliparse.viewer.simple_table import simple_table, convert_json_to_csv
 
 books = [
@@ -63,7 +63,7 @@ def book_delete(argspec):
 
 
 def argument_parser():
-    parser = CommandArgumentParser(
+    parser = argparse.ArgumentParser(
         prog='',
         description='description',
         epilog='end of description', )
@@ -148,5 +148,7 @@ __all__ = ['argument_parser']
 if '__main__' == __name__:
     parse = argument_parser()
     spec = parse.parse_args()
+    if not getattr(spec, 'func', None):
+        exit()
     if spec.func:
         spec.func(spec)
