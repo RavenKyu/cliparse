@@ -31,6 +31,7 @@ class ArgumentCmd(cmd.Cmd):
     # ==========================================================================
     def __init__(self):
         super(ArgumentCmd, self).__init__()
+        readline.set_completer_delims(' ')
 
     # ==========================================================================
     def _do_command(self, line, *args, **kwargs):
