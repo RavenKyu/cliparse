@@ -1,58 +1,70 @@
 import unittest
-from cliparse import CommandArgumentParser,  ArgumentCmd
+from sample_cli.cli import argument_parser
+from cliparse import CommandArgumentParser, ArgumentCmd
 from cliparse import _SubParsersAction, _HelpAction
 import pprint
 
 
 class MyTestCase(unittest.TestCase):
-    @staticmethod
-    def argument_parser():
-        parser = CommandArgumentParser(
-            prog='',
-            description='description',
-            epilog='end of description',)
-
-        sub_parser = parser.add_subparsers(dest='sub_parser')
-        init_parser = sub_parser.add_parser('init', help='Initialize database')
-        init_parser.add_argument('-d', '--init-db', action='store_true',
-                                 help='initialize database.')
-        init_parser.add_argument('-m', '--dummy-members', action='store_true',
-                                 help='insert dummy members.')
-        init_parser.add_argument('-b', '--dummy-books', action='store_true',
-                                 help='insert dummy books.')
-        init_parser.add_argument('-r', '--dummy-rental', action='store_true',
-                                 help='insert dummy rental.')
-
-        init_subparser = init_parser.add_subparsers(dest='init_subparser', help='init_sub')
-        init_sub = init_subparser.add_parser('book', help='About Book')
-        init_sub.add_argument('-a', '--about', help='about sub')
-
-        init_sub = init_subparser.add_parser('book2', help='About Book')
-        init_sub.add_argument('-a', '--about', help='about sub')
-
-        run_app = sub_parser.add_parser('server', help='Run api server')
-        run_app.add_argument('-a', '--address', default='localhost',
-                             help='host address')
-        run_app.add_argument('-p', '--port', type=int, default=5000,
-                             help='port')
-        run_app.add_argument('-d', '--debug', action='store_true')
-
-        return parser
-
     def setUp(self) -> None:
-        self.parser = self.argument_parser()
+        self.parser = argument_parser()
 
-    def test0010_parser(self):
+    def test00100_get_complete_list_auto_complete(self):
+        """
+        getting the completed command when got incomplete command.
+        :return:
+        """
         # add_command('a', parser=self.parser)
-        pass
+        expect = ['manager', ]
+        line = ['manag', ]
+        parser = argument_parser()
+        result = ArgumentCmd.get_complete_list(line, parser)
+        self.assertListEqual(result, expect)
 
-    def test0020_subparser(self):
-        self.parser.parse_args('-h'.split())
+        expect = ['book']
+        line = ['manager', 'bo']
+        parser = argument_parser()
+        result = ArgumentCmd.get_complete_list(line, parser)
+        self.assertListEqual(result, expect)
 
-    def test0100_get_complete_list(self):
+    def test0110_get_complete_list(self):
+        """
+        getting next available commands.
+        :return:
+        """
+        expected = ['exit', 'setting', 'manager']
         line = ''.split()
-        parser = self.argument_parser()
-        print(ArgumentCmd.get_complete_list(line, parser))
+        parser = argument_parser()
+        result = ArgumentCmd.get_complete_list(line, parser)
+        self.assertListEqual(expected, result)
+
+        expected = ['book']
+        line = ['manager', ]
+        parser = argument_parser()
+        result = ArgumentCmd.get_complete_list(line, parser)
+        self.assertListEqual(expected, result)
+
+    def test0110_get_complete_list_all_available_command_options(self):
+        """
+        getting next available commands.
+        :return:
+        """
+        expected = ['-r', '--raw-data',
+                    '-t', '--simple-table',
+                    'insert', 'update', 'delete']
+
+        line = 'manager book '.split()
+        parser = argument_parser()
+        result = ArgumentCmd.get_complete_list(line, parser)
+        self.assertListEqual(expected, result)
+
+        expected = ['-r', '--raw-data',
+                    '-t', '--simple-table',]
+
+        line = 'manager book -'.split()
+        parser = argument_parser()
+        result = ArgumentCmd.get_complete_list(line, parser)
+        self.assertListEqual(expected, result)
 
 
 if __name__ == '__main__':

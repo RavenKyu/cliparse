@@ -1,11 +1,15 @@
-__version__ = '1.0.0b0'
+__version__ = '1.0.0b1'
 
+import io
 import cmd
 import sys
 import readline
 import shlex
 import traceback
 
+from argparse import _SubParsersAction
+from argparse import _HelpAction, Action
+from contextlib import redirect_stdout
 
 # Prevent to execute exit() when help and error method in argparse.Argparser
 sys.exit = lambda: None
@@ -41,11 +45,6 @@ class ArgumentCmd(cmd.Cmd):
             return
 
     # ==========================================================================
-    def _complete_command(self, text, line, start_index, end_index, **kwargs):
-        parser = self.argument_parser()
-        return ArgumentCmd.get_complete_list(line, parser).append(None)
-
-    # ==========================================================================
     def emptyline(self):
         pass
 
@@ -76,19 +75,19 @@ class ArgumentCmd(cmd.Cmd):
         word = ''
         if line:
             word = line.pop(0)
-
         for action in parser._actions:
             if isinstance(action, _HelpAction):
                 continue
-            if isinstance(action, _SubParsersAction):
-                if not word:
-                    return [x for x in action.choices.keys()]
+            elif isinstance(action, _SubParsersAction):
                 rc = [x for x in action.choices.keys() if x.startswith(word)]
-                if word not in rc:
-                    return rc
-                return ArgumentCmd.get_complete_list(
-                    line, action.choices[word], list())
-
+                if 1 == len(rc) and word == rc[0]:
+                    return ArgumentCmd.get_complete_list(
+                        line, action.choices[word], list())
+                result += [x for x in action.choices.keys() if x.startswith(word)]
+            elif isinstance(action, Action):
+                result += [x for x in action.option_strings if x.startswith(word)]
+            else:
+                pass
         return result
 
     # ==========================================================================
