@@ -13,10 +13,7 @@ def arg_parser():
 
 
 ################################################################################
-if __name__ == '__main__':
-    arguments = arg_parser()
-    arg_spec = arguments.parse_args()
-
+def run(cli_package):
     # Import user CLI package
     module_name = 'cli'
     spec = importlib.util.spec_from_file_location('cli', arg_spec.cli_package)
@@ -30,3 +27,13 @@ if __name__ == '__main__':
     cmd.set_cli_parser(cli_parser)
     my_cmd = cmd()
     my_cmd.cmdloop()
+
+
+################################################################################
+if __name__ == '__main__':
+    arguments = arg_parser()
+    arg_spec = arguments.parse_args()
+    run(arg_spec.cli_package)
+
+
+
