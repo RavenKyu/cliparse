@@ -30,7 +30,7 @@ class MyTestCase(unittest.TestCase):
         getting next available commands.
         :return:
         """
-        expected = ['exit', 'setting', 'manager']
+        expected = ['exit', 'prompt', 'setting', 'manager']
         line = ''.split()
         parser = argument_parser()
         result = ArgumentCmd.get_complete_list(line, parser)
