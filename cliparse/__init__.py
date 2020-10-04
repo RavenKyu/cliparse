@@ -1,4 +1,4 @@
-__version__ = '1.0.0b1'
+__version__ = '1.0.0b4'
 
 import io
 import cmd
@@ -23,6 +23,7 @@ class ArgumentCmd(cmd.Cmd):
     def __init__(self):
         super(ArgumentCmd, self).__init__()
         readline.set_completer_delims(' ')
+        ArgumentCmd.read_prompt()
 
     # ==========================================================================
     def _do_command(self, line, *args, **kwargs):
@@ -47,6 +48,11 @@ class ArgumentCmd(cmd.Cmd):
     # ==========================================================================
     def emptyline(self):
         pass
+
+    # ==========================================================================
+    def postcmd(self, stop: bool, line: str) -> bool:
+        ArgumentCmd.read_prompt()
+        return cmd.Cmd.postcmd(self, stop, line)
 
     # ==========================================================================
     def complete(self, text, state):
@@ -132,3 +138,15 @@ class ArgumentCmd(cmd.Cmd):
     def set_cli_parser(cls, parser):
         cls.argument_parser = parser
         cls._add_command(parser)
+
+    # ==========================================================================
+    @staticmethod
+    def read_prompt():
+        try:
+            with open('prompt', 'r') as f:
+                prompt = f.read()
+                if prompt:
+                    ArgumentCmd.prompt = prompt + ' '
+        except FileNotFoundError:
+            pass
+        return ArgumentCmd.prompt
