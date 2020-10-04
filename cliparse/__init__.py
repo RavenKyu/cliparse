@@ -6,6 +6,7 @@ import sys
 import readline
 import shlex
 import traceback
+import importlib.util
 
 from argparse import _SubParsersAction
 from argparse import _HelpAction, Action
@@ -150,3 +151,19 @@ class ArgumentCmd(cmd.Cmd):
         except FileNotFoundError:
             pass
         return ArgumentCmd.prompt
+
+################################################################################
+def run(cli_package):
+    # Import user CLI package
+    module_name = 'cli'
+    spec = importlib.util.spec_from_file_location('cli', cli_package)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    cli_parser = module.argument_parser()
+
+    # Run CLI-Arguments
+    command = ArgumentCmd
+    command.set_cli_parser(cli_parser)
+    my_cmd = command()
+    my_cmd.cmdloop()
