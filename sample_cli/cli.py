@@ -61,6 +61,11 @@ def book_delete(argspec):
         print(f'Out of index. Check and try again ...')
         return
 
+def prompt(argspec):
+    if not argspec.text:
+        return
+    with open('prompt', 'w') as f:
+        f.write(argspec.text)
 
 def argument_parser():
     parser = argparse.ArgumentParser(
@@ -71,6 +76,10 @@ def argument_parser():
 
     exit_parser = sub_parser.add_parser('exit', help='Setting Command')
     exit_parser.set_defaults(func=lambda x: exit(0))
+
+    prompt_parser = sub_parser.add_parser('prompt', help='Setting Command')
+    prompt_parser.add_argument('text', type=str)
+    prompt_parser.set_defaults(func=prompt)
 
     # Setting
     # ==========================================================================
