@@ -7,7 +7,7 @@ __Cliparse__ is a framework to make CLI with ['Argparse'](https://docs.python.or
 [![asciicast](https://asciinema.org/a/J83RPQHIb1mAUG3TGSaplqhy4.svg)](https://asciinema.org/a/J83RPQHIb1mAUG3TGSaplqhy4)
 
 ## Concept
-There are times when it is necessary that to provide a command line client like _MySQL Command line client_.
+There are times when it is necessary that to provide a command line client like _MySQL Command Line Client_.
 ```bash
 $ mysql -uroot -p
 
@@ -15,9 +15,9 @@ Type 'help;', or '\h' for help. Type '\C' to clean current input statement.
 
 mysql> use test_db;
 ```
-Some of legacy cli framework we could have chosen are not easy to extend or low productivity languages. __Cliparse__ is wrote with some of the most used modules in Python. 
+Some of legacy CLI framework we could have chosen are not easy to extend or written in low productivity languages. __Cliparse__ is written with some of the most used modules in Python. 
 
-`Cmd` is very common module of python for making CLI application. It provides a prompt to gets command input from user, tab auto completion, help message or usage. Actually, It's already super easy enough to make CLI applications with `Cmd`.
+`Cmd` is a very common module of python for making CLI application. It provides a prompt to gets command input from user, tab auto completion, help message or usage. Actually, It's already super easy enough to make CLI applications with `Cmd`.
 
 `Argparse` is an argument parser in command line interface. It parses options and arguments. With some short options, we can check validations which several types of arguments such as string or integer and boolean.
 ```python
@@ -48,11 +48,11 @@ parser = ArgumentParser(
                                 help='insert dummy rental.')
     init_db_parser.set_defaults(func=initialize_db)
 ```
-These awesome modules are already using for long time and easy to find how to use on web sites.
+These awesome modules are already used for a long time and easy to find its usage on web sites.
 
 What __Cliparse__ does is to read user's argument parsers, to print the parser groups and parameters for running its function, and to make completing command line when tab. And print a result data of the function defined at the parser with some simple table viewer.
 
-__Cliparse__ is very simple. That's all It dose.
+__Cliparse__ is very simple. That's all it does.
 
 ## Features
 * All command line input validation checking by `Argparse`
@@ -102,7 +102,7 @@ python sample_cli/cli.py -h
 There is a simple sample cli which is able to try basic CRUD. It is in the directory named `sample_cli/cli.py`. Please run command below and try to edit as you want.
 ### Things you can do
 #### Help
-All most each menu can show its help message or usage. 
+Use help command to learn more about a command's usage. 
 ```bash
 # Help
 (Cmd) help
@@ -136,8 +136,7 @@ optional arguments:
 ```
 
 #### Tapping tab key 
-Please, try to tap tab key for completing command line input automatically. Also it shows you command list you can use next. 
-
+Use Tab key to autocomplete commands in the command line. It also shows a list of commands you can use. 
 #### Choosing presentation style 
 ````bash
 # show --raw-data
@@ -164,8 +163,8 @@ Please, try to tap tab key for completing command line input automatically. Also
 ````
 
 ## Contributes
-### Running as develop mode
-It doesn't need to build the docker image every time when ever source code edited. 
+### Running as development mode
+You don't need to build the docker image every time whenever source code changes. 
 ```bash
 docker-compose -f docker-compose.dev.yml run --rm cliparse
 ```
