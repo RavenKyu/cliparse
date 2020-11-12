@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
-from cliparse import __version__
+
+__version__ = '1.0.0b5'
 
 LONG_DESCRIPTION = open("README.md", "r", encoding="utf-8").read()
 
@@ -16,6 +17,7 @@ setup(
     keywords="cli",
     install_requires=[
         'tabulate',
+        'pyreadline; platform_system=="Windows"'
     ],
     packages=find_packages(
         exclude=['sample_cli', 'sample_cli.*', 'tests', 'tests.*']),

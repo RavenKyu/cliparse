@@ -1,2 +1,2 @@
 tabulate
-pudb
+pyreadline; sys_platform == 'win32'

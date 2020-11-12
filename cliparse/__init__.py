@@ -1,9 +1,10 @@
-__version__ = '1.0.0b4'
-
 import io
 import cmd
 import sys
-import readline
+try:
+  import readline
+except ImportError:
+  import pyreadline as readline
 import shlex
 import traceback
 import importlib.util
