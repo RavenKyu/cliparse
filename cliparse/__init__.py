@@ -103,9 +103,11 @@ class ArgumentCmd(cmd.Cmd):
                 if 1 == len(rc) and word == rc[0]:
                     return ArgumentCmd.get_complete_list(
                         line, action.choices[word], list())
-                result += [x for x in action.choices.keys() if x.startswith(word)]
+                result += [x for x in action.choices.keys()
+                           if x.startswith(word)]
             elif isinstance(action, Action):
-                result += [x for x in action.option_strings if x.startswith(word)]
+                result += [
+                    x for x in action.option_strings if x.startswith(word)]
             else:
                 pass
         return result
@@ -165,7 +167,7 @@ class ArgumentCmd(cmd.Cmd):
             pass
         return ArgumentCmd.prompt
 
-################################################################################
+
 def run(cli_package):
     # Import user CLI package
     module_name = 'cli'
