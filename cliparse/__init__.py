@@ -2,6 +2,7 @@ import io
 import cmd
 import platform
 import sys
+import signal
 
 if platform.system() in ('Linux', 'Darwin'):
     import readline
@@ -20,9 +21,11 @@ from contextlib import redirect_stdout
 sys.exit = lambda x: None
 
 
+def signal_int_handler(signum, frame):
+    print('No functions are defined for interrupt signals, see the Signals topic in the manual for more information.')
+    exit(0)
 
 
-################################################################################
 class ArgumentCmd(cmd.Cmd):
     argument_parser = None
 
@@ -177,3 +180,7 @@ def run(cli_package):
     command.set_cli_parser(cli_parser)
     my_cmd = command()
     my_cmd.cmdloop()
+
+
+# Signal
+signal.signal(signal.SIGINT, signal_int_handler)
