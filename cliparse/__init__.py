@@ -1,10 +1,13 @@
 import io
 import cmd
+import platform
 import sys
-try:
-  import readline
-except ImportError:
-  import pyreadline as readline
+
+if platform.system() in ('Linux', 'Darwin'):
+    import readline
+else:
+    import pyreadline as readline
+
 import shlex
 import traceback
 import importlib.util
@@ -14,7 +17,9 @@ from argparse import _HelpAction, Action
 from contextlib import redirect_stdout
 
 # Prevent to execute exit() when help and error method in argparse.Argparser
-sys.exit = lambda: None
+sys.exit = lambda x: None
+
+
 
 
 ################################################################################
@@ -24,7 +29,11 @@ class ArgumentCmd(cmd.Cmd):
     # ==========================================================================
     def __init__(self):
         super(ArgumentCmd, self).__init__()
-        readline.set_completer_delims(' ')
+        if 'libedit' in readline.__doc__:
+            readline.parse_and_bind("bind ^I rl_complete")
+        else:
+            # for gnureadline
+            readline.parse_and_bind("tab: complete")
         ArgumentCmd.read_prompt()
 
     # ==========================================================================
