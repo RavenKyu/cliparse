@@ -4,8 +4,13 @@ from . import run
 
 ################################################################################
 def arg_parser():
-    parser = ArgumentParser()
-    parser.add_argument('cli_package', type=str)
+    parser = ArgumentParser(
+        prog='cliparse',
+        description='CLI Framework with Argparse',
+        epilog='For more information, see the documentation.',
+    )
+    parser.add_argument('cli_package', type=str,
+                        help="Python scripts where the `argument_parser` function exists.")
     return parser
 
 
@@ -13,7 +18,6 @@ def arg_parser():
 if __name__ == '__main__':
     arguments = arg_parser()
     arg_spec = arguments.parse_args()
+    if not arg_spec.cli_package:
+        exit(1)
     run(arg_spec.cli_package)
-
-
-
