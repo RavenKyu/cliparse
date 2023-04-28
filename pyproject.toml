@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "cliparse"
+version = "1.1.0"
+description = "CLI Framework with Argparse"
+license = "MIT"
+authors = ["Duk Kyu Lim <hong18s@gmail.com>"]
+readme = ["README.md"]
+repository = "https://github.com/ravenkyu/cliparse"
+keywords = ["cli", "terminal", "interpreter"]
+classifiers=[
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: MIT License",
+]
+
+exclude = ["sample_cli", 'tests']
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tabulate = "^0.9.0"
+pyreadline3 = {version = "^3.4.1", platform = "windows"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
